@@ -67,6 +67,7 @@ class TFRecordDataset:
         self._cur_lod           = -1
 
         # List tfrecords files and inspect their shapes.
+        print(self.tfrecord_dir)
         assert os.path.isdir(self.tfrecord_dir)
         tfr_files = sorted(glob.glob(os.path.join(self.tfrecord_dir, '*.tfrecords')))
         assert len(tfr_files) >= 1
@@ -227,8 +228,10 @@ class SyntheticDataset:
 
 def load_dataset(class_name='training.dataset.TFRecordDataset', data_dir=None, verbose=False, **kwargs):
     adjusted_kwargs = dict(kwargs)
+    print(data_dir)
     if 'tfrecord_dir' in adjusted_kwargs and data_dir is not None:
         adjusted_kwargs['tfrecord_dir'] = os.path.join(data_dir, adjusted_kwargs['tfrecord_dir'])
+        print(adjusted_kwargs['tfrecord_dir'])
     if verbose:
         print('Streaming data using %s...' % class_name)
     dataset = dnnlib.util.get_obj_by_name(class_name)(**adjusted_kwargs)
