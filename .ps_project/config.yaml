@@ -14,7 +14,7 @@ model: #[optional, but required for model parsing and model deployments]
   path: "/storage/models/20190722-154826"
 
 worker:
-  container: "tensorflow/tensorflow:latest-gpu-jupyter"
+  container: "tensorflow/tensorflow:latest-gpu-py3-jupyter"
   command: "bash start.sh"
   machine-type: "P100"
   count: 1 #[required for multi-node]
