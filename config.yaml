@@ -3,7 +3,7 @@
 version: 1
 
 
-project: "pryv8lzeg"
+project: "prsi25rva"
 experiment: "StyleGan_exp" #[optional, default:<repo name>]
 type: "single" #[single|multi-grpc|multi-mpi]
 ports: "5000" #[optional, default:5000]
