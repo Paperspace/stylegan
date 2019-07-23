@@ -11,7 +11,7 @@
 # Paths.
 
 result_dir = '/storage/ATG/artifacts'
-data_dir = 'datasets'
+data_dir = '/storage/ATG/datasets'
 cache_dir = 'cache'
 run_dir_ignore = ['results', 'datasets', 'cache']
 
