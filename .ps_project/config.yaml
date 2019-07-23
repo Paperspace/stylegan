@@ -15,7 +15,7 @@ model: #[optional, but required for model parsing and model deployments]
 
 worker:
   container: "tensorflow/tensorflow:1.9.0-gpu"
-  command: "nvidia-smi"
+  command: "bash start.sh"
   machine-type: "P100"
   count: 1 #[required for multi-node]
 # parameter-server: #[required for multi-node]
