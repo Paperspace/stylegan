@@ -1,0 +1,62 @@
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, minimum-scale=0.1">
+        <title>Something</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+        
+    </head>
+    <body style="margin: 0px; background: #ffffff;">
+        <h1> This person does not exist!</h1>
+        <!-- <img style="-webkit-user-select: none;max-width: 100%;" src="https://thiscatdoesnotexist.com/"> -->
+        <canvas id="myCanvas"></canvas>
+    </body>
+
+    <script>
+            latents = [Array.from({length: 512}, () => parseFloat(Math.random().toFixed(1)))];
+            // latents = latents.join(',');
+            // data = "[[" + latents + "]]";
+            // json_request = '{{ "instances" : ' + data +' }}';
+            
+            json_request = {
+                instances: latents,
+            }
+            json_request = JSON.stringify(json_request)
+            console.log(json_request);
+            console.log(typeof(json_request))
+            // data = {
+            //     instances: latents,
+            // };
+            prediction = "nothing";
+            $.ajax({
+                url: "https://services.paperspace.io/model-serving/det9l9ckouiw2s:predict",
+                type: "POST",
+                data: json_request,
+            })
+            .done(function(response) {
+                canvas = document.getElementById("myCanvas")
+                console.log(response);
+                prediction = response.predictions;
+                console.log(prediction);
+                prediction_tensor = tf.tensor3d(prediction[0]);
+                prediction_tensor = prediction_tensor.toInt();
+                tf.browser.toPixels(prediction_tensor, canvas);
+            })
+            .fail(function(xhr) {
+                console.log('oh no!');
+                console.log(xhr.responseText);
+            });
+            
+            
+            // function run(su) {
+            //     var canvas = document.getElementById("myCanvas");
+            //     var ctx = canvas.getContext("2d");
+            //     ctx.fillStyle = "FF0000;";
+            //     ctx.fillRect(1000, 1000, 1024, 1024);
+            // }; 
+            // setInterval(function (){
+            //     run();
+            // }, 1000);
+        </script>
+</html>
