@@ -18,13 +18,8 @@ worker:
   command: "bash start.sh"
   machine-type: "P100"
   count: 1 #[required for multi-node]
-# parameter-server: #[required for multi-node]
-#   container: "tensorflow/tensorflow:1.9.0-gpu"
-#   command: "nvidia-smi"
-#   machine-type: "K80"
-#   count: 1
 
-# checks: #[optional]
-#   tensorflow:loss:
-#     target: 0.0..0.5
-#     aggregate: "mean"
+checks: #[optional]
+  tensorflow:loss:
+    target: 0.0..0.5
+    aggregate: "mean"
